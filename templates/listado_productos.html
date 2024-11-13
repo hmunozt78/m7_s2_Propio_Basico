@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load filtros_productos_extras %}
+
+{% block contenido %}
+
+
+    <main>
+        <h1>Listado de productos</h1>
+        
+        <div>
+            <h2>Formulario de filtros:</h2>
+            <form method="get">
+                <div>
+                    <label for="nombre">Filtro por nombre: </label>
+                    <input type="text" value="" name="nombre">
+                </div>
+                <div>
+                    <label for="precio_min">Precio Minimo: </label>
+                    <input type="text" value="" name="precio_min" min="0" max="999999999">
+                </div>
+                <div>
+                    <label for="precio_max">Precio Maximo: </label>
+                    <input type="text" value="" name="precio_max" min="0" max="999999999">
+                </div>
+                <div>
+                    <label for="fecha_vencimiento_min">Fecha vencimiento mínima: </label>
+                    <input type="date" value="{{fecha_vencimiento_min}}" name="fecha_vencimiento_min" id="fecha_vencimiento_min">
+                </div>
+                <div>
+                    <label for="fecha_vencimiento_max">Fecha vencimiento máxima: </label>
+                    <input type="date" value="{{fecha_vencimiento_max}}" name="fecha_vencimiento_max" id="fecha_vencimiento_max">
+                </div>
+                <div>
+                    <input type="submit" value="Buscar">
+                </div>           
+     
+                
+            </form>
+        </div>
+        <div>
+            <h3>Listado de productos</h3>
+            <p>Cantidad de productos: {{productos|length}}</p>
+            <ol>
+            {% for producto in productos %}
+            <li>Nombre: {{producto.nombre}}, 
+                Precio: {{producto.precio|currency}}, 
+                Stock: {{producto.stock}}
+                {% if producto.fecha_vencimiento %}
+                , Vencimiento: {{producto.fecha_vencimiento|date:"d-m-Y"}}
+                {% endif %}
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+        <hr>
+        <div>
+            <h3>Listado de categorias</h3>
+            <p>Cantidad de categorias: {{categorias|length}}</p>
+            <ol>
+            {% for categoria in categorias %}
+                <li>{{categoria.nombre}}</li>
+            {% endfor %}
+            </ol>
+        </div>
+       
+       
+    </main>
+{% endblock contenido %}

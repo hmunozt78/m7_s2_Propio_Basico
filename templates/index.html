@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% block contenido %}
+<main>
+    <h1>INDICE DE LAS PAGINAS DEL PROYECTO</h1>
+    <section>
+        Listado de paginas a revisar:
+
+        <ol>
+            <li><a href="{% url "listado_productos" %}">Listado de Productos - Con Filtros</a></li>
+            <li><a href="{% url "add_productos" %}">Formulario Agregar Productos</a></li>
+            <li><a href="{% url "update_productos" %}">Formulario Actualizar Productos</a></li>
+        </ol>
+    </section>
+</main>
+{% endblock contenido %}
+
